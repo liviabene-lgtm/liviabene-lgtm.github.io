@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#241542">
+  <meta name="description" content="Find Your Impact is a student-created directory to help teens discover volunteer projects, local organizations, and ways to give back. Browse opportunities by age, cause, skill and location.">
+  <title>Find Your Impact | Volunteer opportunities for teens</title>
+  <style>
+    :root{--navy:#251744;--ink:#241a38;--cream:#fcf9f2;--coral:#ff735f;--lav:#e8dafa;--lav2:#f4effd;--line:#ddd4e5;--muted:#615a6d;--white:#fff;--radius:18px}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:16px;line-height:1.58;-webkit-font-smoothing:antialiased}
+    a{color:inherit}
+    a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--coral);outline-offset:3px}
+    button,input{font:inherit}
+    .container{width:min(1150px,calc(100% - 56px));margin-inline:auto}
+    .skip{position:absolute;top:-100px;left:10px;background:white;padding:10px;z-index:100}
+    .skip:focus{top:8px}
+    .topbar{background:var(--cream);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:30}
+    .nav{height:74px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .logo{display:inline-flex;align-items:center;gap:11px;text-decoration:none;font-weight:850;letter-spacing:-.03em;white-space:nowrap}
+    .logo-mark{width:40px;height:40px;border-radius:11px;background:var(--navy);color:var(--coral);display:grid;place-items:center;font-weight:950;font-size:20px;letter-spacing:-.09em}
+    .navlinks{display:flex;align-items:center;gap:26px}
+    .navlinks a{font-size:13px;text-decoration:none;font-weight:750}
+    .navlinks a:not(.nav-btn):hover{text-decoration:underline;text-underline-offset:5px}
+    .navlinks .current{color:#6444bc}
+    .navlinks .nav-btn{padding:11px 17px;border-radius:999px;background:var(--navy);color:white}
+    .navlinks .nav-btn:hover{background:#4a2c7d}
+    .hero{background:var(--navy);color:white;padding:73px 0 67px;overflow:hidden}
+    .hero-grid{display:grid;grid-template-columns:minmax(0,1.13fr) minmax(340px,.87fr);gap:65px;align-items:center}
+    .eyebrow{font-size:11px;font-weight:880;letter-spacing:.16em;text-transform:uppercase;display:flex;align-items:center;gap:9px}
+    .dot{width:8px;height:8px;background:var(--coral);border-radius:50%;display:inline-block;flex:0 0 auto}
+    .hero .eyebrow{color:#ffc4b7}
+    h1,h2,h3,p{margin-top:0}
+    h1,h2,h3{line-height:1.12;letter-spacing:-.055em}
+    .hero h1{font-size:clamp(51px,5.8vw,77px);font-weight:900;letter-spacing:-.055em;line-height:1.03;margin:20px 0 23px;max-width:650px}
+    .hero h1 span{color:var(--coral)}
+    .intro{max-width:540px;font-size:18px;line-height:1.63;color:#e9e0f3;margin-bottom:26px}
+    .search{display:flex;gap:7px;padding:6px;background:#fff;border-radius:13px;max-width:530px;color:var(--ink);box-shadow:0 5px 0 #0000001a}
+    .search label{display:flex;align-items:center;gap:11px;flex:1;min-width:0;padding:0 13px}
+    .search svg{width:20px;height:20px;flex-shrink:0;color:#6b6082}
+    .search input{width:100%;min-width:0;border:0;background:transparent;color:var(--ink);outline:none;font-size:15px;padding:10px 0}
+    .search input::placeholder{color:#7f748f;opacity:1}
+    .search button{background:var(--coral);border:0;color:var(--navy);border-radius:9px;font-size:13px;font-weight:900;padding:14px 21px;cursor:pointer;white-space:nowrap}
+    .search button:hover{background:#ff9584}
+    .undersearch{font-size:12px;color:#d9cde9;margin:13px 0 0}
+    .undersearch a{color:white;text-underline-offset:3px}
+    .hero-art{position:relative;min-height:405px;border-radius:23px;background:var(--lav);color:var(--ink);padding:30px;overflow:hidden;isolation:isolate}
+    .hero-art:before{content:"";position:absolute;border-radius:50%;width:300px;height:300px;background:#ffb8a3;right:-126px;top:-148px;z-index:-1}
+    .hero-art:after{content:"";position:absolute;border:2px solid #b4a0d5;width:340px;height:340px;border-radius:50%;bottom:-244px;left:-85px;z-index:-1}
+    .art-eyebrow{font-size:11px;font-weight:900;letter-spacing:.16em;text-transform:uppercase}
+    .art-title{font-size:clamp(42px,4vw,58px);font-weight:950;letter-spacing:-.055em;line-height:.99;margin:37px 0 24px}
+    .art-title span{color:#7140a5}
+    .art-lines{display:grid;gap:10px;max-width:315px}
+    .art-line{background:rgba(255,255,255,.72);border:1px solid #cbb7e7;padding:11px 13px;border-radius:9px;font-weight:800;font-size:13px;display:flex;align-items:center;gap:12px}
+    .art-line b{background:var(--navy);color:white;width:25px;height:25px;display:grid;place-items:center;border-radius:7px;font-size:11px;flex:none}
+    .art-footer{margin-top:28px;font-size:12px;font-weight:850;color:#544467}
+    .star{position:absolute;right:28px;bottom:13px;color:var(--coral);font-size:73px;font-weight:900;line-height:1;transform:rotate(-12deg)}
+    .mini-stats{padding:25px 0;background:#eee4fc;border-bottom:1px solid #d9c8ef}
+    .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+    .stat{display:flex;gap:15px;align-items:center;border-right:1px solid #cbbce1}
+    .stat:last-child{border:0}
+    .stat strong{font-size:34px;letter-spacing:-.08em;line-height:1;font-weight:900}
+    .stat span{font-size:12px;max-width:170px;font-weight:680;line-height:1.35}
+    .section{padding-top:82px;padding-bottom:8px}
+    .section-head{display:flex;justify-content:space-between;gap:25px;align-items:end;margin-bottom:26px}
+    .section h2,.story h2,.final h2{font-size:clamp(33px,4vw,51px);margin:10px 0 13px}
+    .section-head p{color:var(--muted);font-size:15px;max-width:375px;margin:0}
+    .link-arrow{font-weight:850;text-decoration:none;color:#5a35a1;font-size:14px;white-space:nowrap}
+    .link-arrow:hover{text-decoration:underline;text-underline-offset:4px}
+    .topics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+    .topic{background:white;border:1px solid #d6cbdf;border-radius:16px;padding:19px;min-height:179px;text-decoration:none;display:flex;flex-direction:column;justify-content:space-between;transition:transform .18s,box-shadow .18s}
+    .topic:hover{transform:translateY(-3px);box-shadow:0 9px 0 #25174413}
+    .topic:nth-child(2){background:#ffe5df}.topic:nth-child(3){background:#f1e6ff}.topic:nth-child(4){background:#ffeaca}
+    .topic .topic-icon{font-size:26px;font-weight:900;line-height:1}
+    .topic h3{font-size:21px;margin:10px 0 5px}
+    .topic small{font-size:12px;color:#50445f;font-weight:800}
+    .mission{padding-top:95px;padding-bottom:84px}
+    .mission-grid{display:grid;grid-template-columns:1fr 1fr;gap:57px;align-items:center}
+    .mission-card{border-radius:22px;background:var(--coral);padding:43px;min-height:280px;display:flex;flex-direction:column;justify-content:space-between}
+    .mission-card .callout{font-size:clamp(37px,4.8vw,63px);font-weight:950;line-height:1.03;letter-spacing:-.075em;max-width:425px}
+    .mission-card .foot{font-weight:850;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+    .mission-copy .eyebrow{color:#7140a5}
+    .mission-copy h2{font-size:clamp(34px,3.5vw,47px);margin:14px 0 17px}
+    .mission-copy p{color:#554b62;font-size:16px;max-width:500px}
+    .story{background:#f2eafc;padding:75px 0 82px}
+    .story-grid{display:grid;grid-template-columns:.86fr 1.14fr;gap:75px;align-items:start}
+    .story-label{background:var(--navy);color:white;border-radius:20px;padding:37px;min-height:355px;display:flex;flex-direction:column;justify-content:space-between}
+    .story-label .byline{font-weight:950;font-size:clamp(51px,6.6vw,94px);letter-spacing:-.09em;line-height:.92}
+    .story-label .byline em{color:var(--coral);font-style:normal}
+    .story-label p{color:#e5d8f5;max-width:295px;font-size:15px;margin:20px 0 0}
+    .story-text .eyebrow{color:#6e40af}
+    .story-text h2{margin:14px 0 19px}
+    .story-text p{color:#41354f;font-size:15px;margin-bottom:13px;max-width:600px}
+    .story-text .pull{color:#372052;font-weight:900;font-size:17px;margin-top:19px}
+    .steps{padding-top:86px;padding-bottom:76px}
+    .steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:24px}
+    .step{border-top:3px solid var(--navy);padding:22px 20px 17px 0}
+    .step .number{font-weight:900;font-size:17px;color:#a65f84;letter-spacing:-.04em}
+    .step h3{font-size:24px;margin:22px 0 9px}
+    .step p{color:#5e546b;font-size:14px;max-width:320px}
+    .final{background:var(--navy);color:white;border-radius:21px;margin-bottom:71px;padding:51px 54px;display:flex;align-items:center;justify-content:space-between;gap:25px}
+    .final h2{margin:9px 0 12px}
+    .final p{color:#e1d4ed;margin-bottom:0;max-width:520px}
+    .button{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border-radius:999px;background:var(--coral);color:var(--navy);font-size:14px;font-weight:900;padding:15px 22px;white-space:nowrap}
+    .button:hover{background:#ff9380}
+    footer{background:#1c112f;color:white;padding:43px 0}
+    .footer-wrap{display:flex;justify-content:space-between;gap:28px;align-items:start}
+    footer p,footer small{color:#d2c5de;font-size:12px;margin:8px 0;max-width:500px}
+    footer a{color:white;font-size:13px}
+    .footer-nav{display:flex;gap:19px;flex-wrap:wrap}
+    .accuracy{font-size:12px;color:#6a6074;max-width:1000px;margin:18px auto 0}
+    @media(max-width:1000px){.hero-grid{grid-template-columns:1fr 1fr;gap:28px}.hero h1{font-size:clamp(49px,6vw,70px)}.hero-art{min-height:430px;padding:25px}.art-title{font-size:45px}.story-grid{gap:35px}.topics{grid-template-columns:repeat(2,1fr)}.stat{gap:10px}}
+    @media(max-width:780px){.container{width:min(100% - 36px,1150px)}.nav{height:67px}.navlinks{gap:14px}.navlinks a:not(.nav-btn){display:none}.logo{font-size:14px}.hero{padding:50px 0 52px}.hero-grid{grid-template-columns:1fr;gap:35px}.hero h1{font-size:clamp(46px,9vw,70px);max-width:660px}.intro{font-size:16px}.hero-art{min-height:285px;padding:26px}.art-title{font-size:43px;margin:21px 0 18px}.art-lines{grid-template-columns:1fr 1fr;gap:8px;max-width:none}.art-line{padding:10px;font-size:12px}.art-line:last-child{grid-column:1/-1;max-width:70%}.art-footer{margin-top:19px}.mini-stats{padding:23px 0}.stats-grid{grid-template-columns:1fr 1fr;gap:14px}.stat:nth-child(2){border-right:0}.stat:nth-child(3){grid-column:1/-1;border-top:1px solid #cbbce1;padding-top:17px}.mission-grid,.story-grid{grid-template-columns:1fr;gap:29px}.mission{padding-top:70px;padding-bottom:65px}.mission-card{min-height:240px}.story{padding:60px 0}.story-label{min-height:230px}.story-label .byline{font-size:66px}.steps{padding-top:65px}.steps-grid{grid-template-columns:1fr;gap:4px}.step{padding:17px 0 6px}.step h3{margin:7px 0}.final{padding:33px;flex-direction:column;align-items:flex-start}.footer-wrap{flex-direction:column}}
+    @media(max-width:450px){.container{width:calc(100% - 34px)}.logo{font-size:13px;gap:8px}.logo-mark{width:35px;height:35px;font-size:18px}.navlinks .nav-btn{font-size:12px;padding:9px 12px}.hero h1{font-size:48px}.hero-art{min-height:330px}.art-title{font-size:43px}.art-lines{grid-template-columns:1fr}.art-line:last-child{grid-column:auto;max-width:none}.star{font-size:50px;right:13px;bottom:8px}.search{flex-wrap:wrap;gap:4px}.search label{min-height:44px}.search button{width:100%;padding:11px}.undersearch{line-height:1.8}.stats-grid{grid-template-columns:1fr;gap:12px}.stat,.stat:nth-child(2){border-right:0}.stat:nth-child(3){grid-column:auto;padding-top:0;border-top:0}.stat strong{font-size:31px;width:64px}.section{padding-top:60px}.section-head{display:block}.topics{gap:10px}.topic{padding:15px;min-height:149px}.topic h3{font-size:18px}.mission-card{padding:28px;min-height:215px}.mission-card .callout{font-size:43px}.story-label .byline{font-size:58px}.final{margin-bottom:44px}.nav{gap:7px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.topic{transition:none}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <header class="topbar"><div class="container"><nav class="nav" aria-label="Main navigation">
+    <a href="index.html" class="logo" aria-label="Find Your Impact — homepage"><span class="logo-mark">fyi.</span><span>Find Your Impact</span></a>
+    <div class="navlinks"><a href="index.html" class="current" aria-current="page">Home</a><a href="explore.html">Explore</a><a href="#about">About Livia</a><a href="#how">How it works</a><a class="nav-btn" href="explore.html">Find opportunities ↗</a></div>
+  </nav></div></header>
+  <main id="content">
+    <section class="hero"><div class="container hero-grid">
+      <div><div class="eyebrow"><span class="dot"></span> VOLUNTEERING, WITHOUT THE GUESSWORK</div>
+        <h1>Find a cause.<br><span>Make it yours.</span></h1>
+        <p class="intro">You want to make a difference. Finding somewhere to start shouldn't take hours. Explore volunteering, community projects, and ways to give back—all in one place.</p>
+        <form class="search" action="explore.html" method="get" role="search">
+          <label><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg><input type="search" name="q" aria-label="Search opportunities" placeholder="Try ‘animals’, ‘cancer’, ‘tutoring’..."></label><button type="submit">Find opportunities ↗</button>
+        </form>
+        <p class="undersearch">Or jump to <a href="explore.html?q=environment">environment</a>, <a href="explore.html?q=education">education</a>, or <a href="explore.html?q=social%20justice">social justice</a>.</p>
+      </div>
+      <div class="hero-art" aria-label="Illustration of three steps: pick a cause, choose a role, make an impact">
+        <div class="art-eyebrow">THE IDEA IS PRETTY SIMPLE.</div>
+        <div class="art-title">Start small.<br><span>Go far.</span></div>
+        <div class="art-lines">
+          <div class="art-line"><b>01</b> Pick a cause that matters.</div>
+          <div class="art-line"><b>02</b> Find something that fits.</div>
+          <div class="art-line"><b>03</b> Take your first step.</div>
+        </div>
+        <div class="art-footer">No perfect résumé required.</div><span class="star" aria-hidden="true">✳</span>
+      </div>
+    </div></section>
+    <div class="mini-stats"><div class="container stats-grid">
+      <div class="stat"><strong>407</strong><span>volunteer research entries*</span></div>
+      <div class="stat"><strong>260</strong><span>giving options in the directory*</span></div>
+      <div class="stat"><strong>264</strong><span>organizations and programs</span></div>
+    </div></div>
+    <section class="container section" id="causes">
+      <div class="eyebrow">Not sure what to search for?</div>
+      <div class="section-head"><div><h2>Start with what matters to you.</h2><p>There's no one right way to help. Follow your curiosity and see where it takes you.</p></div><a class="link-arrow" href="explore.html">See every opportunity ↗</a></div>
+      <div class="topics">
+        <a class="topic" href="explore.html?q=cancer"><span class="topic-icon" aria-hidden="true">✳</span><span><h3>Cancer & health</h3><small>Research · patients · support ↗</small></span></a>
+        <a class="topic" href="explore.html?q=social%20justice"><span class="topic-icon" aria-hidden="true">◎</span><span><h3>Social justice</h3><small>Advocacy · community · equity ↗</small></span></a>
+        <a class="topic" href="explore.html?q=animals"><span class="topic-icon" aria-hidden="true">♡</span><span><h3>Animals & nature</h3><small>Wildlife · conservation · care ↗</small></span></a>
+        <a class="topic" href="explore.html?q=education"><span class="topic-icon" aria-hidden="true">✎</span><span><h3>Education & youth</h3><small>Tutoring · literacy · mentoring ↗</small></span></a>
+      </div>
+      <p class="accuracy">*Listings include projects, ways to help, and inquiry leads. They are not a count of confirmed current vacancies. Age rules and availability must be checked directly with organizers.</p>
+    </section>
+    <section class="container mission" id="mission"><div class="mission-grid"><div class="mission-card"><div class="callout">Good intentions deserve a better starting point.</div><div class="foot">THE FIND YOUR IMPACT MISSION ↗</div></div>
+      <div class="mission-copy"><div class="eyebrow">Why this exists</div><h2>A little less searching.<br>A lot more doing.</h2><p>Find Your Impact brings volunteer opportunities and causes into one searchable directory, with special attention to the things teens need to know: age eligibility, online versus in-person options, skills, and location.</p><p>The goal isn't to tell you what you should care about. It's to make it easier to act on what you already do.</p></div>
+    </div></section>
+    <section class="story" id="about"><div class="container story-grid"><div class="story-label"><div class="byline">HI, I'M<br><em>LIVIA.</em></div><p>High school student. Boston area. Big believer in taking that first step.</p></div>
+      <div class="story-text"><div class="eyebrow">A note from the founder</div><h2>I made the site I wish I'd had.</h2>
+        <p>Hi! I'm Livia, a high school student in the Boston area.</p>
+        <p>During my freshman year, I got involved with a nonprofit volunteer organization. It ended up being one of the most rewarding—and genuinely fun—parts of my year. I met people who cared about the same things I did, and I wanted to find more ways to help.</p>
+        <p>But the more I looked, the more complicated it seemed. I had trouble finding opportunities that welcomed teenagers, and my friends were running into the same problem. Important details, especially age restrictions, were scattered across different websites or difficult to find.</p>
+        <p>That's why I started Find Your Impact: a place to bring those possibilities together and make exploring them simpler. Whether you're looking for your first volunteer experience or a new cause to support, I hope it helps you discover something meaningful.</p>
+        <p class="pull">Making a difference shouldn't depend on knowing where to look.</p>
+      </div>
+    </div></section>
+    <section class="container steps" id="how"><div class="eyebrow">How it works</div><h2>Three steps to getting involved.</h2><div class="steps-grid">
+      <div class="step"><div class="number">01 / EXPLORE</div><h3>Follow your interests.</h3><p>Search by cause, organization, skill, or type of project. You don't need to know exactly what you're looking for yet.</p></div>
+      <div class="step"><div class="number">02 / FILTER</div><h3>Find your fit.</h3><p>Use age, location, format, and skills to narrow the options. Unconfirmed eligibility is flagged, not guessed.</p></div>
+      <div class="step"><div class="number">03 / CONNECT</div><h3>Check the details.</h3><p>Visit the official organization's page to confirm current openings, supervision requirements, and how to apply.</p></div>
+    </div></section>
+    <section class="container"><div class="final"><div><div class="eyebrow" style="color:#ffc4b7">YOUR NEXT STEP STARTS HERE</div><h2>Find something worth showing up for.</h2><p>Browse the opportunities, see what sounds interesting, and take it from there.</p></div><a class="button" href="explore.html">Explore the directory ↗</a></div></section>
+  </main>
+  <footer><div class="container footer-wrap"><div><strong>fyi. Find Your Impact</strong><p>Created by a Boston-area high school student to make giving back easier to discover.</p><small>This is a research directory, not an application or donation platform. Confirm current openings, eligibility, and school credit with each organizer. © 2026 Find Your Impact.</small></div><div class="footer-nav"><a href="index.html">Home</a><a href="explore.html">Explore</a><a href="#about">Our story</a><a href="#how">How it works</a></div></div></footer>
+</body>
+</html>
